@@ -57,7 +57,11 @@ function ProductForm() {
 
     try {
         if (method=='new') {
-            console.log("");
+            const response = await axios.post('http://localhost:8080/api/products', product, {
+                headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+             }
+            });
         } else {
             const response = await axios.put('http://localhost:8080/api/products', product, {
                 headers: {

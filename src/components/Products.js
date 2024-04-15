@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 
 
 import axios from 'axios';
@@ -148,8 +148,21 @@ function Products() {
     setNotification({ ...notification, open: false });
   };
 
+  const handleCreateNewProduct = () => {
+    navigate('/products/new');
+  };
+
   return (
     <div style={{ height: 600, width: '100%' }}>
+      <Box sx={{ mb: 2 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleCreateNewProduct}
+        >
+          Agregar Producto
+        </Button>
+      </Box>
       <DataGrid
         editMode='row'
         rows={productData}
