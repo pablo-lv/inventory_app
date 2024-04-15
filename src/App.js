@@ -6,6 +6,7 @@ import Orders from './components/Orders';
 import Layout from './components/Layout';
 import LoginPage from './components/LoginPage';
 import AuthRoute from './components/AuthRoute';
+import ProductForm from './components/ProductForm';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
           <Route index element={<AuthRoute><Dashboard /></AuthRoute>} />
           <Route path="products" element={<AuthRoute><Products /></AuthRoute>} />
           <Route path="orders" element={<AuthRoute><Orders /></AuthRoute>} />
+          <Route path="products/:id" element={<AuthRoute><ProductForm /></AuthRoute>} />
+          <Route path="products/new" element={<AuthRoute><ProductForm /></AuthRoute>} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
       </Routes>
