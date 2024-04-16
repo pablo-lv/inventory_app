@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 import LoginPage from './components/LoginPage';
 import AuthRoute from './components/AuthRoute';
 import ProductForm from './components/ProductForm';
+import ProductsStore from './components/ProductsStore';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<AuthRoute><Dashboard /></AuthRoute>} />
           <Route path="products" element={<AuthRoute><Products /></AuthRoute>} />
-          <Route path="orders" element={<AuthRoute><Orders /></AuthRoute>} />
+          <Route path="store" element={<AuthRoute><ProductsStore /></AuthRoute>} />
           <Route path="products/:id" element={<AuthRoute><ProductForm /></AuthRoute>} />
           <Route path="products/new" element={<AuthRoute><ProductForm /></AuthRoute>} />
         </Route>
