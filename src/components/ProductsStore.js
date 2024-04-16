@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Card, CardContent, CardActions, Typography, Button, IconButton, Badge, Menu, MenuItem, Divider } from '@mui/material';
+import { Grid, Card, CardContent, CardActions, Typography, Button, IconButton, Badge, Menu, MenuItem, Divider, Tooltip } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -97,6 +97,8 @@ function ProductStore() {
                 }
               });
             console.log("Sale response:", response.data);
+
+            navigate("/sales");
         
         } catch (error) {
             console.error("Failed to process sale:", error);
@@ -139,7 +141,7 @@ function ProductStore() {
                     </IconButton>
                 </MenuItem>
             )) : (
-                <MenuItem onClick={handleClose}>Your cart is empty</MenuItem>
+                <MenuItem onClick={handleClose}>Carrito de compra vacio</MenuItem>
             )}
             {cart.length > 0 && (
                 <>
@@ -178,7 +180,17 @@ function ProductStore() {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" onClick={() => addToCart(product)}>Agregar</Button>
+                            <Tooltip title="Sin productos" disableFocusListener disableTouchListener>
+                                <span>
+                                    <Button 
+                                        size="small" 
+                                        onClick={() => addToCart(product)} 
+                                        disabled={product.stock === 0}
+                                    >
+                                        Agregar
+                                    </Button>
+                                </span>
+                            </Tooltip>
                             </CardActions>
                         </Card>
                     </Grid>

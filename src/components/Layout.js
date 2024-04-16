@@ -97,15 +97,15 @@ function Layout() {
         <List>
           <ListItem button component={Link} to="/">
             <ListItemIcon><Dashboard /></ListItemIcon>
-            <ListItemText primary="Dashboard" />
+            <ListItemText primary="Tienda" />
           </ListItem>
           <ListItem button component={Link} to="/products">
             <ListItemIcon><ShoppingBasket /></ListItemIcon>
-            <ListItemText primary="Products" />
+            <ListItemText primary="Productos" />
           </ListItem>
-          <ListItem button component={Link} to="/orders">
+          <ListItem button component={Link} to="/sales">
             <ListItemIcon><Receipt /></ListItemIcon>
-            <ListItemText primary="Orders" />
+            <ListItemText primary="Ventas" />
           </ListItem>
         </List>
       </Drawer>
