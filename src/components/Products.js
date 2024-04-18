@@ -20,12 +20,12 @@ function Products() {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
-    { field: 'name', headerName: 'Name', width: 150 },
-    { field: 'description', headerName: 'Description', width: 250 },
-    { field: 'price', headerName: 'Price', width: 100 },
+    { field: 'name', headerName: 'Nombre', width: 150 },
+    { field: 'description', headerName: 'Descripción', width: 250 },
+    { field: 'price', headerName: 'Precio', width: 100 },
     { field: 'stock', headerName: 'Stock', width: 100 },
-    { field: 'entryDate', headerName: 'Entry Date', width: 200 },
-    { field: 'category', headerName: 'Category', width: 150 },
+    { field: 'entryDate', headerName: 'Fecha Entrada', width: 200 },
+    { field: 'category', headerName: 'Categoría', width: 150 },
     {
       field: "actions",
       headerName: "Actions",
@@ -40,14 +40,14 @@ function Products() {
               onClick={() => handleUpdate(params.id)}
               style={{ marginRight: 16 }}
             >
-              Update
+              Actualizar
             </Button>
             <Button
               color="secondary"
               size="small"
               onClick={() => handleDelete(params.id)}
             >
-              Delete
+              Borrar
             </Button>
           </>
         );
@@ -124,17 +124,18 @@ function Products() {
         });
         response.data.forEach(item => {
           if (item.entryDate) {
-              const date = new Date(item.entryDate);
-              const formattedDate = date.toLocaleString("en-US", {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  second: '2-digit',
-                  hour12: true,
-                  timeZone: 'America/Mexico_City'
-              });
+            const [year, month, day, hour, minute, second] = item.entryDate;
+            const date = new Date(year, month - 1, day, hour, minute, second);
+            
+            const formattedDate = date.toLocaleString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true // Set to false if you prefer 24-hour format
+            });
               item.entryDate = formattedDate;
           }
       });

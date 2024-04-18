@@ -41,23 +41,23 @@ function Sales() {
             Authorization: `Bearer ${accessToken}`
           }
         });
-        response.data.forEach(item => {
-          if (item.createdAt) {
-            const [year, month, day, hour, minute, second] = item.createdAt;
-            const date = new Date(year, month - 1, day, hour, minute, second);
-            
-            const formattedDate = date.toLocaleString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true // Set to false if you prefer 24-hour format
-            });
-              item.createdAt = formattedDate;
-          }
-      });
+          response.data.forEach(item => {
+            if (item.createdAt) {
+              const [year, month, day, hour, minute, second] = item.createdAt;
+              const date = new Date(year, month - 1, day, hour, minute, second);
+              
+              const formattedDate = date.toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit',
+                  hour12: true // Set to false if you prefer 24-hour format
+              });
+                item.createdAt = formattedDate;
+            }
+        });
         setSalesData(response.data);
       } catch (error) {
         console.error('There was an error fetching the product data:', error);

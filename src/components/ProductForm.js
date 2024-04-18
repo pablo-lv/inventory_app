@@ -5,6 +5,11 @@ import axios from 'axios';
 
 import Notification from './Notification'; 
 
+function isDST(date) {
+  const jan = new Date(date.getFullYear(), 0, 1).getTimezoneOffset();
+  const jul = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
+  return date.getTimezoneOffset() < Math.max(jan, jul);
+}
 
 function ProductForm() {
   const { id } = useParams(); // Get the ID from the URL
@@ -65,6 +70,14 @@ function ProductForm() {
 
     try {
         let response;
+        
+        const currentDate = new Date();
+            const isDst = isDST(currentDate);
+            const mxOffset = isDst ? -5 : -6;
+            const mxDate = new Date(currentDate.getTime() + (mxOffset * 60 * 60 * 1000));
+            const formattedTime = mxDate.toISOString().substring(11, 19);
+            const dateToSend = `${product.entryDate}T${formattedTime}`;
+            product.entryDate = dateToSend;
         if (method === 'post') {
             response = await axios.post('http://localhost:8080/api/products', product, {
                 headers: {
