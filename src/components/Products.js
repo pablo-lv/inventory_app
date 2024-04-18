@@ -24,7 +24,7 @@ function Products() {
     { field: 'description', headerName: 'Description', width: 250 },
     { field: 'price', headerName: 'Price', width: 100 },
     { field: 'stock', headerName: 'Stock', width: 100 },
-    { field: 'entryDate', headerName: 'Entry Date', width: 110 },
+    { field: 'entryDate', headerName: 'Entry Date', width: 200 },
     { field: 'category', headerName: 'Category', width: 150 },
     {
       field: "actions",
@@ -124,16 +124,20 @@ function Products() {
         });
         response.data.forEach(item => {
           if (item.entryDate) {
-            const date = new Date(item.entryDate);
-            const formattedDate = date.toLocaleDateString("en-US", {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              timeZone: 'UTC'
-            });
-            item.entryDate = formattedDate;
+              const date = new Date(item.entryDate);
+              const formattedDate = date.toLocaleString("en-US", {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit',
+                  hour12: true,
+                  timeZone: 'America/Mexico_City'
+              });
+              item.entryDate = formattedDate;
           }
-        });
+      });
         setProductData(response.data);
       } catch (error) {
         console.error('There was an error fetching the product data:', error);
