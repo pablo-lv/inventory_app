@@ -11,6 +11,23 @@ function isDST(date) {
   return date.getTimezoneOffset() < Math.max(jan, jul);
 }
 
+function getMexicoCityDate() {
+  function isDST(date) {
+      const jan = new Date(date.getFullYear(), 0, 1).getTimezoneOffset();
+      const jul = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
+      return date.getTimezoneOffset() < Math.max(jan, jul);
+  }
+
+  const currentDate = new Date();
+  const isDst = isDST(currentDate);
+  const mxOffset = isDst ? -5 : -6; // Mexico City timezone offset for DST or Standard Time
+  const mxDate = new Date(currentDate.getTime() + mxOffset * 3600 * 1000);
+  const formattedDate = mxDate.toISOString().split('T')[0];
+
+  return formattedDate;
+}
+
+
 function ProductForm() {
   const { id } = useParams(); // Get the ID from the URL
   const navigate = useNavigate();
@@ -51,7 +68,7 @@ function ProductForm() {
     } else {
       setProduct(prev => ({
         ...prev,
-        entryDate: new Date().toISOString().split('T')[0]  // Sets the current date for new products
+        entryDate: getMexicoCityDate()  // Sets the current date for new products
       }));
     }
   }, [id]);
